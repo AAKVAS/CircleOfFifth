@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">CircleOfFifth</string>
+    <string name="menu">Меню</string>
+    <string name="survive">Выживание</string>
+    <string name="training">Тренировка</string>
+    <string name="trial">Испытание</string>
+
+    <string name="back">Назад</string>
+
+    <string name="tries">Попытка: %d из %d</string>
+    <string name="score">Счёт: %d</string>
+    <string name="record">Рекорд: %d</string>
+</resources>
