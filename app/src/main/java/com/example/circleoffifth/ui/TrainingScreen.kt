@@ -1,6 +1,5 @@
 package com.example.circleoffifth.ui
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +13,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.circleoffifth.R
 import com.example.circleoffifth.ui.components.CircleOfFifth
+import com.example.circleoffifth.utils.ChordSoundManager
 
 @Composable
 fun TrainingScreen() {
@@ -23,12 +23,12 @@ fun TrainingScreen() {
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(dimensionResource(id = R.dimen.padding_medium))
+                .padding(dimensionResource(id = R.dimen.padding_small))
         ) {
             val context = LocalContext.current
+
             CircleOfFifth(
-                onChordClick = { Toast.makeText(context, it.title, Toast.LENGTH_SHORT).show() },
-                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium))
+                onChordClick = { ChordSoundManager.playChord(it) }
             )
         }
     }

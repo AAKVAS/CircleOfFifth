@@ -10,4 +10,8 @@
     <string name="tries">Попытка: %d из %d</string>
     <string name="score">Счёт: %d</string>
     <string name="record">Рекорд: %d</string>
+
+    <string name="game_over">Игра окончена</string>
+    <string name="game_over_score">Ваш счёт: %d</string>
+    <string name="restart">Заново</string>
 </resources>

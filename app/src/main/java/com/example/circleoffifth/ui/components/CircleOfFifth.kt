@@ -9,8 +9,11 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Text
@@ -43,6 +46,7 @@ import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.circleoffifth.R
 import com.example.circleoffifth.data.Chord
@@ -95,16 +99,22 @@ fun CircleOfFifth(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .wrapContentHeight()
+            .aspectRatio(1f)
+            .onGloballyPositioned {
+                columnWidth = it.size.width.toFloat()
+                center = Offset(columnWidth / 2, columnWidth / 2)
+                radius = columnWidth / 13
+                innerRadius = radius * 2.5f
+                mediumRadius = radius * 3.5f
+                outerRadius = radius * 5.5f
+            }
     ) {
         Canvas(
             modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
+                .fillMaxSize()
                 .pointerInput(Unit) {
                     detectTapGestures(onTap = {
-                        onChordClick(Chord.A)
-                        /*findChord(
+                        findChord(
                             offset = it,
                             center = center,
                             innerRadius = innerRadius,
@@ -114,7 +124,7 @@ fun CircleOfFifth(
                             innerChordList = innerChordList
                         )?.let { chord ->
                             onChordClick(chord)
-                        } ?: onChordClick(Chord.A)*/
+                        }
                     })
                 }
         ) {
@@ -234,9 +244,10 @@ fun calculateChordIndex(
     dx: Double,
     dy: Double
 ): Int {
-    val angle = (180 / Math.PI * atan2(dy, dx)).toFloat()
-    val angleInDegrees = if (angle < 0) angle + 360 else angle
-    return (angleInDegrees % 360 / (360 / 12)).toInt()
+    val angle = (180 / Math.PI * atan2(dy, dx)).toFloat() - 90
+    val posAngle = if (angle < 0) angle + 360  else angle
+    Log.d("ANGLE", posAngle.toString())
+    return ((posAngle + 15) % 360 / (360 / 12)).toInt()
 }
 
 
