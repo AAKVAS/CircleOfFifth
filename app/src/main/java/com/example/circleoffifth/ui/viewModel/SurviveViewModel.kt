@@ -7,11 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.circleoffifth.data.Chord
 import com.example.circleoffifth.data.ChordRepository
-import com.example.circleoffifth.data.ChordRepositoryImpl
-import com.example.circleoffifth.ui.viewModel.TrialViewModel.Companion.SCORE_INCREMENT
+import com.example.circleoffifth.data.entities.Mode
+import com.example.circleoffifth.data.entities.ScoreState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.UUID
 import javax.inject.Inject
 import kotlin.math.max
 
@@ -42,7 +42,9 @@ class SurviveViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             _record.value = chordRepository.getSurviveRecord()
-            _score.value = chordRepository.getSurviveScoreState()?.score ?: 0
+            chordRepository.getSurviveScoreState()?.let {
+                _score.value = it.score
+            }
         }
     }
 
@@ -67,6 +69,14 @@ class SurviveViewModel @Inject constructor(
 
     fun incrementScore() {
         _score.value += SCORE_INCREMENT
+        viewModelScope.launch {
+            val scoreState = ScoreState(
+                UUID.randomUUID().toString(),
+                chordRepository.getGameModeByName(Mode.SURVIVE).uid,
+                _score.value
+            )
+            chordRepository.saveScoreState(scoreState)
+        }
     }
 
     fun finishGame() {

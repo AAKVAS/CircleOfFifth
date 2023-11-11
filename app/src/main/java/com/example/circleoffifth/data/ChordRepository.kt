@@ -1,5 +1,6 @@
 package com.example.circleoffifth.data
 
+import com.example.circleoffifth.data.entities.Mode
 import com.example.circleoffifth.data.entities.ScoreState
 
 interface ChordRepository {
@@ -12,4 +13,5 @@ interface ChordRepository {
     suspend fun saveScoreState(scoreState: ScoreState)
     suspend fun deleteSurviveScoreState()
     suspend fun deleteTrialScoreState()
+    suspend fun getGameModeByName(modeName: String): Mode
 }

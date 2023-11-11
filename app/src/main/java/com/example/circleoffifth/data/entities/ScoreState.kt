@@ -11,5 +11,5 @@ data class ScoreState(
     @ColumnInfo(name = "mode_uid")
     val modeUid: String,
     val score: Int,
-    val move: Int
+    val move: Int = 0
 )

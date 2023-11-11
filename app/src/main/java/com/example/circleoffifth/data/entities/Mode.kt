@@ -1,6 +1,5 @@
 package com.example.circleoffifth.data.entities
 
-import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

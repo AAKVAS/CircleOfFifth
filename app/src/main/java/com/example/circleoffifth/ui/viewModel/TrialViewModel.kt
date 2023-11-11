@@ -4,14 +4,14 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.circleoffifth.data.Chord
 import com.example.circleoffifth.data.ChordRepository
-import com.example.circleoffifth.data.ChordRepositoryImpl
+import com.example.circleoffifth.data.entities.Mode
+import com.example.circleoffifth.data.entities.ScoreState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.UUID
 import javax.inject.Inject
 import kotlin.math.max
 
@@ -72,6 +72,16 @@ class TrialViewModel @Inject constructor(
                 return
             }
             _currentMove.value += 1
+            viewModelScope.launch {
+                val scoreState = ScoreState(
+                    UUID.randomUUID().toString(),
+                    chordRepository.getGameModeByName(Mode.TRIAL).uid,
+                    _score.value,
+                    _currentMove.value
+                )
+                chordRepository.deleteTrialScoreState()
+                chordRepository.saveScoreState(scoreState)
+            }
         }
     }
 

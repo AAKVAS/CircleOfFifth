@@ -5,5 +5,7 @@
     <dimen name="padding_medium">16dp</dimen>
     <dimen name="card_corner_radius">12dp</dimen>
     <dimen name="min_card_height">72dp</dimen>
-    <dimen name="icon_medium">60dp</dimen>
+    <dimen name="icon_medium">32dp</dimen>
+    <dimen name="btn_height">48dp</dimen>
+    <dimen name="btn_width">144dp</dimen>
 </resources>

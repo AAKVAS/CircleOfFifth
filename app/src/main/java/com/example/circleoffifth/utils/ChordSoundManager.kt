@@ -2,7 +2,6 @@ package com.example.circleoffifth.utils
 
 import android.content.Context
 import android.media.AudioAttributes
-import android.media.MediaPlayer
 import android.media.SoundPool
 import com.example.circleoffifth.R
 import com.example.circleoffifth.data.Chord
