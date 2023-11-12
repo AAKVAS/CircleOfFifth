@@ -16,7 +16,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -27,17 +26,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.circleoffifth.R
 import com.example.circleoffifth.ui.components.ChordButton
 import com.example.circleoffifth.ui.components.CircleOfFifth
+import com.example.circleoffifth.ui.components.Moves
 import com.example.circleoffifth.ui.components.Record
 import com.example.circleoffifth.ui.components.Score
-import com.example.circleoffifth.ui.components.Tries
-import com.example.circleoffifth.ui.viewModel.TrialViewModel
+import com.example.circleoffifth.ui.viewModel.ChallengeViewModel
 import com.example.circleoffifth.utils.ChordSoundManager
 
 @Composable
-fun TrialScreen(
-    viewModel: TrialViewModel = hiltViewModel()
+fun ChallengeScreen(
+    viewModel: ChallengeViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
     val currentChord by remember { viewModel.currentChord }
     val currentMove by remember { viewModel.currentMove }
     val endGame by remember { viewModel.isEndGame }
@@ -56,9 +54,9 @@ fun TrialScreen(
             Column(
                 verticalArrangement = Arrangement.Top,
             ) {
-                TrialGameStateLabels(
+                ChallengeGameStateLabels(
                     currentMove = currentMove,
-                    moveCount = TrialViewModel.MOVES_COUNT,
+                    moveCount = ChallengeViewModel.MOVES_COUNT,
                     score = score,
                     record = record
                 )
@@ -82,7 +80,7 @@ fun TrialScreen(
 }
 
 @Composable
-fun TrialGameStateLabels(
+fun ChallengeGameStateLabels(
     modifier: Modifier = Modifier,
     currentMove: Int = 0,
     moveCount: Int = 0,
@@ -94,7 +92,7 @@ fun TrialGameStateLabels(
             .fillMaxWidth(),
         horizontalAlignment = Alignment.End
     ) {
-        Tries(currentTry = currentMove, triesCount = moveCount)
+        Moves(currentTry = currentMove, triesCount = moveCount)
         Score(score = score)
         Record(record = record)
     }
@@ -145,6 +143,6 @@ fun RestartDialog(
 
 @Preview
 @Composable
-fun TrialScreenPreview() {
-    TrialScreen()
+fun ChallengeScreenPreview() {
+    ChallengeScreen()
 }

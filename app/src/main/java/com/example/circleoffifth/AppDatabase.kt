@@ -8,8 +8,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.circleoffifth.AppDatabase.Companion.VERSION
 import com.example.circleoffifth.data.dao.GameDao
 import com.example.circleoffifth.data.entities.Mode
+import com.example.circleoffifth.data.entities.Mode.Companion.CHALLENGE
 import com.example.circleoffifth.data.entities.Mode.Companion.SURVIVE
-import com.example.circleoffifth.data.entities.Mode.Companion.TRIAL
 import com.example.circleoffifth.data.entities.Records
 import com.example.circleoffifth.data.entities.ScoreState
 import kotlinx.coroutines.CoroutineScope
@@ -53,7 +53,7 @@ abstract class AppDatabase: RoomDatabase() {
         fun onCreate(scope: CoroutineScope) {
             instance?.let {
                 scope.launch {
-                    val trialMode = Mode(UUID.randomUUID().toString(), TRIAL)
+                    val trialMode = Mode(UUID.randomUUID().toString(), CHALLENGE)
                     val surviveMode = Mode(UUID.randomUUID().toString(), SURVIVE)
                     it.getGameDao().saveMode(trialMode)
                     it.getGameDao().saveMode(surviveMode)

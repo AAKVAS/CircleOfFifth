@@ -5,13 +5,13 @@ import com.example.circleoffifth.data.entities.ScoreState
 
 interface ChordRepository {
     suspend fun updateSurviveRecord(record: Int)
-    suspend fun updateTrialRecord(record: Int)
+    suspend fun updateChallengeRecord(record: Int)
     suspend fun getSurviveRecord(): Int
-    suspend fun getTrialRecord(): Int
+    suspend fun getChallengeRecord(): Int
     suspend fun getSurviveScoreState(): ScoreState?
-    suspend fun getTrialScoreState(): ScoreState?
+    suspend fun getChallengeScoreState(): ScoreState?
     suspend fun saveScoreState(scoreState: ScoreState)
     suspend fun deleteSurviveScoreState()
-    suspend fun deleteTrialScoreState()
-    suspend fun getGameModeByName(modeName: String): Mode
+    suspend fun deleteChallengeScoreState()
+    suspend fun getGameModeByName(modeName: String): Mode?
 }

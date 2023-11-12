@@ -10,7 +10,7 @@ data class Mode(
     val name: String
 ) {
     companion object {
-        const val TRIAL = "trial"
+        const val CHALLENGE = "сhallenge"
         const val SURVIVE = "survive"
     }
 }

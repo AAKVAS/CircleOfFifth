@@ -1,21 +1,21 @@
 <resources>
-    <string name="app_name">Кварто-квинтовый круг</string>
-    <string name="menu">Меню</string>
-    <string name="survive">Выживание</string>
-    <string name="survive_description">Проверьте, сколько раз сможете отгадать аккорд безошибочно</string>
-    <string name="training">Тренировка</string>
-    <string name="training_description">Экспериментируйте со звуками и научитесь распознавать аккорды</string>
-    <string name="trial">Испытание</string>
-    <string name="trial_description">Испытайте свои навыки за 10 попыток</string>
+    <string name="app_name">Circle of fifths</string>
+    <string name="menu">Menu</string>
+    <string name="survive">Survive</string>
+    <string name="survive_description">See how many times you can accurately guess the chord</string>
+    <string name="training">Training</string>
+    <string name="training_description">Experiment with sounds and learn to recognize chords</string>
+    <string name="challenge">Challenge</string>
+    <string name="challenge_description">Try your luck in 10 chord challenges!</string>
 
-    <string name="back">Назад</string>
-    <string name="play_chord">Сыграть аккорд</string>
+    <string name="back">Back</string>
+    <string name="play_chord">Play chord</string>
 
-    <string name="tries">Попытка: %d из %d</string>
-    <string name="score">Счёт: %d</string>
-    <string name="record">Рекорд: %d</string>
+    <string name="moves">Move: %d of %d</string>
+    <string name="score">Score: %d</string>
+    <string name="record">Record: %d</string>
 
-    <string name="game_over">Игра окончена</string>
-    <string name="game_over_score">Ваш счёт: %d</string>
-    <string name="restart">Заново</string>
+    <string name="game_over">Game over</string>
+    <string name="game_over_score">Score: %d</string>
+    <string name="restart">Restart</string>
 </resources>

@@ -9,17 +9,17 @@ import javax.inject.Inject
 class ChordRepositoryImpl @Inject constructor(
     private val gameDao: GameDao
 ) : ChordRepository {
-    override suspend fun getGameModeByName(modeName: String): Mode {
+    override suspend fun getGameModeByName(modeName: String): Mode? {
         return gameDao.getGameModeByName(modeName)
     }
 
     override suspend fun updateSurviveRecord(record: Int) {
-        val mode: Mode = getGameModeByName(Mode.SURVIVE)
+        val mode: Mode = getGameModeByName(Mode.SURVIVE)!!
         updateRecord(mode.uid, record)
     }
 
-    override suspend fun updateTrialRecord(record: Int) {
-        val mode: Mode = getGameModeByName(Mode.TRIAL)
+    override suspend fun updateChallengeRecord(record: Int) {
+        val mode: Mode = getGameModeByName(Mode.CHALLENGE)!!
         updateRecord(mode.uid, record)
     }
 
@@ -31,23 +31,31 @@ class ChordRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getSurviveRecord(): Int {
-        val mode: Mode = getGameModeByName(Mode.SURVIVE)
-        return gameDao.getRecords(mode.uid)?.record ?: 0
+        val mode: Mode? = getGameModeByName(Mode.SURVIVE)
+        return mode?.let {
+            gameDao.getRecords(it.uid)?.record
+        } ?: 0
     }
 
-    override suspend fun getTrialRecord(): Int {
-        val mode: Mode = getGameModeByName(Mode.TRIAL)
-        return gameDao.getRecords(mode.uid)?.record ?: 0
+    override suspend fun getChallengeRecord(): Int {
+        val mode: Mode? = getGameModeByName(Mode.CHALLENGE)
+        return mode?.let {
+            gameDao.getRecords(it.uid)?.record
+        } ?: 0
     }
 
-    override suspend fun getSurviveScoreState(): ScoreState {
-        val mode: Mode = getGameModeByName(Mode.SURVIVE)
-        return gameDao.getGameScoreState(mode.uid)
+    override suspend fun getSurviveScoreState(): ScoreState? {
+        val mode: Mode?= getGameModeByName(Mode.SURVIVE)
+        return mode?.let {
+            gameDao.getGameScoreState(it.uid)
+        }
     }
 
-    override suspend fun getTrialScoreState(): ScoreState {
-        val mode: Mode = getGameModeByName(Mode.TRIAL)
-        return gameDao.getGameScoreState(mode.uid)
+    override suspend fun getChallengeScoreState(): ScoreState? {
+        val mode: Mode? = getGameModeByName(Mode.CHALLENGE)
+        return mode?.let {
+            gameDao.getGameScoreState(it.uid)
+        }
     }
 
     override suspend fun saveScoreState(scoreState: ScoreState) {
@@ -55,12 +63,12 @@ class ChordRepositoryImpl @Inject constructor(
     }
 
     override suspend fun deleteSurviveScoreState() {
-        val mode: Mode = getGameModeByName(Mode.SURVIVE)
+        val mode: Mode = getGameModeByName(Mode.SURVIVE)!!
         gameDao.deleteScoreState(mode.uid)
     }
 
-    override suspend fun deleteTrialScoreState() {
-        val mode: Mode = getGameModeByName(Mode.TRIAL)
+    override suspend fun deleteChallengeScoreState() {
+        val mode: Mode = getGameModeByName(Mode.CHALLENGE)!!
         gameDao.deleteScoreState(mode.uid)
     }
 }

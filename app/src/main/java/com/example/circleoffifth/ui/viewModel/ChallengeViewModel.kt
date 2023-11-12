@@ -16,7 +16,7 @@ import javax.inject.Inject
 import kotlin.math.max
 
 @HiltViewModel
-class TrialViewModel @Inject constructor(
+class ChallengeViewModel @Inject constructor(
     private val chordRepository: ChordRepository
 ) : ViewModel() {
     private val _record: MutableState<Int> = mutableIntStateOf(0)
@@ -45,8 +45,8 @@ class TrialViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _record.value = chordRepository.getTrialRecord()
-            chordRepository.getTrialScoreState()?.let {
+            _record.value = chordRepository.getChallengeRecord()
+            chordRepository.getChallengeScoreState()?.let {
                 _score.value = it.score
                 _currentMove.value = it.move
             }
@@ -75,11 +75,11 @@ class TrialViewModel @Inject constructor(
             viewModelScope.launch {
                 val scoreState = ScoreState(
                     UUID.randomUUID().toString(),
-                    chordRepository.getGameModeByName(Mode.TRIAL).uid,
+                    chordRepository.getGameModeByName(Mode.CHALLENGE)!!.uid,
                     _score.value,
                     _currentMove.value
                 )
-                chordRepository.deleteTrialScoreState()
+                chordRepository.deleteChallengeScoreState()
                 chordRepository.saveScoreState(scoreState)
             }
         }
@@ -99,8 +99,8 @@ class TrialViewModel @Inject constructor(
         _score.value = 0
         _currentMove.value = 0
         viewModelScope.launch {
-            chordRepository.updateTrialRecord(record.value)
-            chordRepository.deleteTrialScoreState()
+            chordRepository.updateChallengeRecord(record.value)
+            chordRepository.deleteChallengeScoreState()
         }
     }
 

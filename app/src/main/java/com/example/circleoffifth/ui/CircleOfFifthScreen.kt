@@ -43,9 +43,9 @@ enum class Destinations(
         description = R.string.training_description,
         image = R.drawable.baseline_school_24
     ),
-    TRIAL(
-        title = R.string.trial,
-        description = R.string.trial_description,
+    CHALLENGE(
+        title = R.string.challenge,
+        description = R.string.challenge_description,
         image = R.drawable.baseline_self_improvement_24
     ),
 }
@@ -78,7 +78,7 @@ fun CircleOfFifthApp(
             composable(route = Destinations.MENU.name) {
                 val screens: List<Destinations> = listOf(
                     Destinations.TRAINING,
-                    Destinations.TRIAL,
+                    Destinations.CHALLENGE,
                     Destinations.SURVIVE
                 )
                 MenuScreen(screens, { navController.navigate(it.name) })
@@ -86,8 +86,8 @@ fun CircleOfFifthApp(
             composable(route = Destinations.TRAINING.name) {
                 TrainingScreen()
             }
-            composable(route = Destinations.TRIAL.name) {
-                TrialScreen()
+            composable(route = Destinations.CHALLENGE.name) {
+                ChallengeScreen()
             }
             composable(route = Destinations.SURVIVE.name) {
                 SurviveScreen()

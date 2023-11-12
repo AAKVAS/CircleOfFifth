@@ -72,7 +72,7 @@ class SurviveViewModel @Inject constructor(
         viewModelScope.launch {
             val scoreState = ScoreState(
                 UUID.randomUUID().toString(),
-                chordRepository.getGameModeByName(Mode.SURVIVE).uid,
+                chordRepository.getGameModeByName(Mode.SURVIVE)!!.uid,
                 _score.value
             )
             chordRepository.saveScoreState(scoreState)

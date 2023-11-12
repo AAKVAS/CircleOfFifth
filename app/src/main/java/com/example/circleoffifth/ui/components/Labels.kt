@@ -7,13 +7,13 @@ import androidx.compose.ui.res.stringResource
 import com.example.circleoffifth.R
 
 @Composable
-fun Tries(
+fun Moves(
     currentTry: Int,
     triesCount: Int,
     modifier: Modifier = Modifier
 ) {
     Text(
-        text = stringResource(id = R.string.tries, currentTry, triesCount),
+        text = stringResource(id = R.string.moves, currentTry, triesCount),
         modifier = modifier
     )
 }
