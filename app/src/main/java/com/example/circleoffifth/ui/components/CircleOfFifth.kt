@@ -1,5 +1,6 @@
 package com.example.circleoffifth.ui.components
 
+import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -69,7 +70,7 @@ fun CircleOfFifth(
     )
 
     val textMeasurer = rememberTextMeasurer()
-    var columnWidth by remember { mutableFloatStateOf(0f) }
+    var diameter by remember { mutableFloatStateOf(0f) }
     var center by remember { mutableStateOf(Offset(0f, 0f)) }
     var radius by remember { mutableFloatStateOf(0f) }
     var innerRadius by remember { mutableFloatStateOf(0f) }
@@ -79,12 +80,11 @@ fun CircleOfFifth(
 
     Column(
         modifier = modifier
-            .fillMaxWidth()
             .aspectRatio(1f)
             .onGloballyPositioned {
-                columnWidth = it.size.width.toFloat()
-                center = Offset(columnWidth / 2, columnWidth / 2)
-                radius = columnWidth / 13
+                diameter = minOf(it.size.width, it.size.height).toFloat()
+                center = Offset(diameter / 2, diameter / 2)
+                radius = diameter / 13
                 innerRadius = radius * 2.5f
                 mediumRadius = radius * 3.5f
                 outerRadius = radius * 5.5f
@@ -234,7 +234,7 @@ fun calculateChordIndex(
 }
 
 
-@Preview
+@Preview(uiMode = Configuration.ORIENTATION_LANDSCAPE)
 @Composable
 fun CircleofFiftPreview() {
     Box(

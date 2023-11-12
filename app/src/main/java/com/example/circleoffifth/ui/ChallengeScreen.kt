@@ -1,7 +1,10 @@
 package com.example.circleoffifth.ui
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -24,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.circleoffifth.R
+import com.example.circleoffifth.data.Chord
 import com.example.circleoffifth.ui.components.ChordButton
 import com.example.circleoffifth.ui.components.CircleOfFifth
 import com.example.circleoffifth.ui.components.Moves
@@ -43,6 +48,37 @@ fun ChallengeScreen(
     val score by remember { viewModel.score }
     val record by remember { viewModel.record }
 
+    val configuration = LocalConfiguration.current
+    if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+        VerticalChallengeScreen(
+            viewModel = viewModel,
+            currentChord = currentChord,
+            currentMove = currentMove,
+            score = score,
+            record = record,
+            endGame = endGame
+        )
+    } else {
+        HorizontalChallengeScreen(
+            viewModel = viewModel,
+            currentChord = currentChord,
+            currentMove = currentMove,
+            score = score,
+            record = record,
+            endGame = endGame
+        )
+    }
+}
+
+@Composable
+fun VerticalChallengeScreen(
+    viewModel: ChallengeViewModel,
+    currentChord: Chord,
+    currentMove: Int,
+    score: Int,
+    record: Int,
+    endGame: Boolean
+) {
     Surface {
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
@@ -60,15 +96,67 @@ fun ChallengeScreen(
                     score = score,
                     record = record
                 )
-                CircleOfFifth(onChordClick = {
-                    ChordSoundManager.playChord(it)
-                    viewModel.checkChord(it)
-                })
+                CircleOfFifth(
+                    onChordClick = {
+                        ChordSoundManager.playChord(it)
+                        viewModel.checkChord(it)
+                    }
+                )
             }
             ChordButton(onClick = {
                 ChordSoundManager.playChord(currentChord)
                 viewModel.clickPlayChordBtn()
             })
+        }
+    }
+    if (endGame) {
+        RestartDialog(
+            score,
+            viewModel::restart
+        )
+    }
+}
+
+@Composable
+fun HorizontalChallengeScreen(
+    viewModel: ChallengeViewModel,
+    currentChord: Chord,
+    currentMove: Int,
+    score: Int,
+    record: Int,
+    endGame: Boolean
+) {
+    Surface {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(dimensionResource(id = R.dimen.padding_small))
+        ) {
+            CircleOfFifth(
+                modifier = Modifier.fillMaxHeight(),
+                onChordClick = {
+                    ChordSoundManager.playChord(it)
+                    viewModel.checkChord(it)
+                }
+            )
+            Column(
+                verticalArrangement = Arrangement.SpaceBetween,
+                horizontalAlignment = Alignment.End,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                ChallengeGameStateLabels(
+                    currentMove = currentMove,
+                    moveCount = ChallengeViewModel.MOVES_COUNT,
+                    score = score,
+                    record = record
+                )
+                ChordButton(
+                    onClick = {
+                        ChordSoundManager.playChord(currentChord)
+                        viewModel.clickPlayChordBtn()
+                    }
+                )
+            }
         }
     }
     if (endGame) {
@@ -88,8 +176,7 @@ fun ChallengeGameStateLabels(
     record: Int = 0
 ) {
     Column(
-        modifier = modifier
-            .fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.End
     ) {
         Moves(currentTry = currentMove, triesCount = moveCount)

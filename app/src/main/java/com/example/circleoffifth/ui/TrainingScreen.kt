@@ -1,13 +1,17 @@
 package com.example.circleoffifth.ui
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,9 +29,13 @@ fun TrainingScreen() {
                 .fillMaxSize()
                 .padding(dimensionResource(id = R.dimen.padding_small))
         ) {
-            val context = LocalContext.current
-
+            val configuration = LocalConfiguration.current
             CircleOfFifth(
+                modifier =
+                if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
+                    Modifier.fillMaxHeight()
+                    else Modifier.fillMaxWidth()
+                ,
                 onChordClick = { ChordSoundManager.playChord(it) }
             )
         }
