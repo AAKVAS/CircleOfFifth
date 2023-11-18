@@ -48,10 +48,10 @@ class SurviveViewModel @Inject constructor(
         }
     }
 
-    fun getRandomChord(): Chord =
+    private fun getRandomChord(): Chord =
         Chord.values().toList().shuffled().first()
 
-    fun setCurrentChordRandom() {
+    private fun setCurrentChordRandom() {
         _currentChord.value = getRandomChord()
         playChordBtnClicked = false
     }
@@ -67,7 +67,7 @@ class SurviveViewModel @Inject constructor(
         }
     }
 
-    fun incrementScore() {
+    private fun incrementScore() {
         _score.value += SCORE_INCREMENT
         viewModelScope.launch {
             val scoreState = ScoreState(
@@ -79,7 +79,7 @@ class SurviveViewModel @Inject constructor(
         }
     }
 
-    fun finishGame() {
+    private fun finishGame() {
         _isEndGame.value = true
     }
 

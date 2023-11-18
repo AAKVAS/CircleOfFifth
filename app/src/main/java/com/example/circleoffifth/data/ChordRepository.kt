@@ -2,6 +2,7 @@ package com.example.circleoffifth.data
 
 import com.example.circleoffifth.data.entities.Mode
 import com.example.circleoffifth.data.entities.ScoreState
+import kotlinx.coroutines.flow.Flow
 
 interface ChordRepository {
     suspend fun updateSurviveRecord(record: Int)
@@ -13,5 +14,6 @@ interface ChordRepository {
     suspend fun saveScoreState(scoreState: ScoreState)
     suspend fun deleteSurviveScoreState()
     suspend fun deleteChallengeScoreState()
-    suspend fun getGameModeByName(modeName: String): Mode?
+    suspend fun getGameModeByName(modeName: String): Mode
+    fun getGameModeFlowByName(modeName: String): Flow<Mode?>
 }

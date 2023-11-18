@@ -20,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -34,7 +33,6 @@ import com.example.circleoffifth.ui.components.ChordButton
 import com.example.circleoffifth.ui.components.CircleOfFifth
 import com.example.circleoffifth.ui.components.Record
 import com.example.circleoffifth.ui.components.Score
-import com.example.circleoffifth.ui.viewModel.ChallengeViewModel
 import com.example.circleoffifth.ui.viewModel.SurviveViewModel
 import com.example.circleoffifth.utils.ChordSoundManager
 
@@ -188,9 +186,9 @@ fun RestartDialog(
 
 @Composable
 fun SurviveGameStateLabels(
+    modifier: Modifier = Modifier,
     score: Int = 0,
     record: Int = 0,
-    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier

@@ -31,8 +31,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.circleoffifth.data.Chord
-import java.lang.Math.pow
+import java.lang.Math.toRadians
 import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.pow
+import kotlin.math.sin
 
 
 @Composable
@@ -77,6 +80,8 @@ fun CircleOfFifth(
     var mediumRadius by remember { mutableFloatStateOf(0f) }
     var outerRadius by remember { mutableFloatStateOf(0f) }
     val outerCircleColor = MaterialTheme.colorScheme.primaryContainer
+    val innerCircleColor = MaterialTheme.colorScheme.onPrimary
+    val textColor = MaterialTheme.colorScheme.onSurface
 
     Column(
         modifier = modifier
@@ -110,29 +115,29 @@ fun CircleOfFifth(
                     })
                 }
         ) {
-            DrawChordList(this, outerRadius, center, radius * 2f, outerChordList, textMeasurer, outerCircleColor)
-            DrawChordList(this, mediumRadius, center, radius * 2f, innerChordList, textMeasurer, Color.White)
-            DrawChordBorders(this, innerRadius, center, radius * 4f)
+            drawChordList(this, outerRadius, center, radius * 2f, outerChordList, textMeasurer, outerCircleColor, textColor = textColor)
+            drawChordList(this, mediumRadius, center, radius * 2f, innerChordList, textMeasurer, innerCircleColor, textColor = textColor)
+            drawChordBorders(this, innerRadius, center, radius * 4f, borderColor = Color.Black)
             drawCircle(color = Color.Black, radius = radius * 2.5f, center = center, style = Stroke(width = 2f))
         }
     }
 }
 
-fun DrawChordList(
+fun drawChordList(
     drawScope: DrawScope,
     radius: Float,
     center: Offset,
     thickness: Float,
     outerChordList: List<Chord>,
     textMeasurer: TextMeasurer,
-    circleColor: Color
+    circleColor: Color,
+    textColor: Color
 ) {
     drawScope.drawCircle(color = circleColor, radius = radius, center = center, style = Stroke(width = thickness))
     drawScope.drawCircle(color = Color.Black, radius = radius + thickness / 2, center = center, style = Stroke(width = 2f))
 
     var currentAngle = -90f
     outerChordList.forEach { chord ->
-        val radius = radius
         val angleOffset = 360f / outerChordList.size
 
         val textLayoutResult = textMeasurer.measure(
@@ -147,41 +152,42 @@ fun DrawChordList(
         val textHeight = textLayoutResult.size.height
 
         val textOffset = Offset(
-            center.x + radius * Math.cos(Math.toRadians(currentAngle.toDouble())).toFloat() - textWidth / 2,
-            center.y + radius * Math.sin(Math.toRadians(currentAngle.toDouble())).toFloat() - textHeight / 2
+            center.x + radius * cos(toRadians(currentAngle.toDouble())).toFloat() - textWidth / 2,
+            center.y + radius * sin(toRadians(currentAngle.toDouble())).toFloat() - textHeight / 2
         )
 
         drawScope.drawText(
             textLayoutResult,
             topLeft = textOffset,
-            color = Color.Black
+            color = textColor
         )
         currentAngle += angleOffset
     }
 }
 
-fun DrawChordBorders(
+fun drawChordBorders(
     drawScope: DrawScope,
     radius: Float,
     center: Offset,
     thickness: Float,
+    borderColor: Color
 ) {
     var currentAngle = -45f
     for (i in 0 until 12) {
         val angleOffset = 360f / 12
 
         val start = Offset(
-            x = center.x + radius * Math.cos(Math.toRadians(currentAngle.toDouble())).toFloat(),
-            y = center.y + radius * Math.sin(Math.toRadians(currentAngle.toDouble())).toFloat()
+            x = center.x + radius * cos(toRadians(currentAngle.toDouble())).toFloat(),
+            y = center.y + radius * sin(toRadians(currentAngle.toDouble())).toFloat()
         )
 
         val end = Offset(
-            x = center.x + (radius + thickness) * Math.cos(Math.toRadians(currentAngle.toDouble())).toFloat(),
-            y = center.y + (radius + thickness) * Math.sin(Math.toRadians(currentAngle.toDouble())).toFloat()
+            x = center.x + (radius + thickness) * cos(toRadians(currentAngle.toDouble())).toFloat(),
+            y = center.y + (radius + thickness) * sin(toRadians(currentAngle.toDouble())).toFloat()
         )
 
         drawScope.drawLine(
-            color = Color.Black,
+            color = borderColor,
             start = start,
             end = end,
             strokeWidth = 2f
@@ -221,7 +227,7 @@ fun findChord(
 }
 
 fun insideCircle(dx: Double, dy: Double, radius: Double): Boolean =
-    pow(dx, 2.0) + pow(dy, 2.0) <= pow(radius, 2.0)
+    dx.pow(2.0) + dy.pow(2.0) <= radius.pow(2.0)
 
 fun calculateChordIndex(
     dx: Double,
@@ -238,10 +244,8 @@ fun calculateChordIndex(
 @Composable
 fun CircleofFiftPreview() {
     Box(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
-        CircleOfFifth(modifier = Modifier
-            .fillMaxWidth())
+        CircleOfFifth(modifier = Modifier.fillMaxWidth())
     }
 }

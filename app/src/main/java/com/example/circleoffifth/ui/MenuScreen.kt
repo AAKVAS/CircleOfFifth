@@ -20,19 +20,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.circleoffifth.R
-import com.example.compose.CircleOfFifthTheme
+import com.example.circleoffifth.ui.theme.CircleOfFifthTheme
 
 @Composable
 fun MenuScreen(
     screens: List<Destinations>,
-    onItemClick: (_: Destinations) -> Unit = {},
     modifier: Modifier = Modifier,
+    onItemClick: (_: Destinations) -> Unit = {},
 ) {
     LazyColumn(
         contentPadding = PaddingValues(dimensionResource(R.dimen.padding_medium)),
@@ -74,12 +75,13 @@ fun MenuItem(
                     contentDescription = stringResource(screen.title!!),
                     alignment = Alignment.Center,
                     contentScale =  ContentScale.Crop,
+                    colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.primary),
                     modifier = Modifier
                         .padding(end = dimensionResource(id = R.dimen.padding_small))
                         .size(dimensionResource(R.dimen.icon_medium))
                 )
                 Text(
-                    text = stringResource(id = screen.title!!),
+                    text = stringResource(id = screen.title),
                     style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.primary,
                 )

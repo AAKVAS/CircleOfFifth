@@ -27,7 +27,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.circleoffifth.R
-import com.example.compose.CircleOfFifthTheme
+import com.example.circleoffifth.ui.theme.CircleOfFifthTheme
 
 enum class Destinations(
     @StringRes val title: Int? = null,
@@ -83,7 +83,7 @@ fun CircleOfFifthApp(
                     Destinations.CHALLENGE,
                     Destinations.SURVIVE
                 )
-                MenuScreen(screens, { navController.navigate(it.name) })
+                MenuScreen(screens = screens, onItemClick = { navController.navigate(it.name) })
             }
             composable(route = Destinations.TRAINING.name) {
                 TrainingScreen()

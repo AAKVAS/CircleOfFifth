@@ -8,25 +8,25 @@
         android:name="ring_group">
         <path
             android:pathData="M 375,355 A 325,325 0 0 0 -275,355 Z"
-            android:strokeColor="@color/black"
+            android:strokeColor="#FF000000"
             android:strokeWidth="2"
             />
         <path
             android:pathData="M 325,355 A 275,275 0 0 0 -225,355 Z"
-            android:strokeColor="@color/black"
+            android:strokeColor="#FF000000"
             android:strokeWidth="2"
             />
         <path
             android:pathData="M 24,31 L40,108Z"
-            android:strokeColor="@color/black"
+            android:strokeColor="#FF000000"
             android:strokeWidth="2"
             />
         <path
             android:pathData="M 84,31 L68,108Z"
-            android:strokeColor="@color/black"
+            android:strokeColor="#FF000000"
             android:strokeWidth="2"
             />
-        <path android:fillColor="#006C4B"
+        <path android:fillColor="#FF006C4B"
             android:pathData="M54,50 v10.55 c-0.59, -0.34 -1.27, -0.55 -2, -0.55 -2.21,0 -4,1.79 -4,4s1.79,4 4,4 4,-1.79 4,-4 v-17h4v-3h-6z"/>
     </group>
 </vector>

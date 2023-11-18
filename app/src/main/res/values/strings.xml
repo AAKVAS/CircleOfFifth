@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Circle of fifths</string>
-    <string name="menu">Menu</string>
     <string name="survive">Survive</string>
     <string name="survive_description">See how many times you can accurately guess the chord</string>
     <string name="training">Training</string>
@@ -8,7 +7,6 @@
     <string name="challenge">Challenge</string>
     <string name="challenge_description">Try your luck in 10 chord challenges!</string>
 
-    <string name="back">Back</string>
     <string name="play_chord">Play chord</string>
 
     <string name="moves">Move: %d of %d</string>
