@@ -1,4 +1,6 @@
-## Circle Of Fifth
+[Russian](README_ru.md)
+
+# Circle Of Fifth
 Android Application "Circle of Fifth" for Ear Training.
 
 ## 📖 Description
