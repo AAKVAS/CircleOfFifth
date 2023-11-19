@@ -1,7 +1,15 @@
 [Russian](README_ru.md)
 
+<div align="center">
+
 # Circle Of Fifth
 Android Application "Circle of Fifth" for Ear Training.
+
+<a href="https://github.com/AAKVAS/CircleOfFifth/releases/latest">
+      <img alt="Get it on GitHub" src="https://raw.githubusercontent.com/deckerst/common/main/assets/get-it-on-github.png" height="100">
+</a>
+
+</div>
 
 ## 📖 Description
 The primary feature of the application is the Circle of Fifths, where clicking on chords produces the corresponding piano chord sounds.
