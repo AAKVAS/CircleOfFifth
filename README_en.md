@@ -1,4 +1,4 @@
-[Russian](README_ru.md)
+[Russian](README.md)
 
 <div align="center">
 
