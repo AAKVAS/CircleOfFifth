@@ -8,7 +8,7 @@ The primary feature of the application is the Circle of Fifths, where clicking o
 
 Upon entering the application, users encounter a menu with the following sections:
 * __Training__: A screen featuring the Circle of Fifths, allowing users to click on chords to compose melodies or practice recognizing chord sounds.
-* __Challenge__: This screen presents the Circle of Fifths alongside a button that generates a random sound. Users are required to identify this sound within 10 attempts. The final result displays the number of successful identifications.
+* __Challenge__: This screen presents the Circle of Fifths alongside a button that generates a random sound. The user's task is to find this chord. Total 10 rounds. Each correct answer increases the score by 10 points.
 * __Survive__: Similar to the Challenge mode, this screen includes the Circle of Fifths and a button that produces a random chord sound. Each correct answer increases the score until an error is made, resetting the score.
 
 ## 📷 Screenshots
