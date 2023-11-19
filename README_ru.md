@@ -1,7 +1,18 @@
 [English](README.md)
 
+<div align="center">
+
 # Кварто-квинтовый круг
 Android приложение для тренировки музыкального слуха.
+
+<a href="https://apps.rustore.ru/app/com.example.circleoffifth">
+      <img alt="Get it on RuStore" src="https://github.com/AAKVAS/CircleOfFifth/assets/76523640/7ee0bc43-e132-451c-a795-ef5999fae0c8" height="100">
+</a>
+<a href="https://github.com/AAKVAS/CircleOfFifth/releases/latest">
+      <img alt="Get it on GitHub" src="https://raw.githubusercontent.com/deckerst/common/main/assets/get-it-on-github.png" height="100">
+</a>
+
+</div>
 
 ## 📖 Описание
 Основным элементом приложения является кварто-квинтовый круг, при нажатии аккордов в котором проигрываются звуки пианино.
