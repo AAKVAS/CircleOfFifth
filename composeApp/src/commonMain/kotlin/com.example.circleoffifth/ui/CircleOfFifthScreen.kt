@@ -27,7 +27,8 @@ import circleoffifth.composeapp.generated.resources.survive
 import circleoffifth.composeapp.generated.resources.survive_description
 import circleoffifth.composeapp.generated.resources.training
 import circleoffifth.composeapp.generated.resources.training_description
-import com.example.circleoffifth.ui.theme.CommonTheme
+import com.example.circleoffifth.ui.theme.LocalColorProvider
+import com.example.circleoffifth.ui.util.isPortraitOrientation
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -108,19 +109,17 @@ fun AppBar(
     navigateUp: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    //TODO: LocalWindowInfo
-//    val configuration = LocalConfiguration.current
-//    if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//        return
-//    }
+    if (isPortraitOrientation().not()) {
+        return
+    }
     TopAppBar(
         title = { currentScreen.title?.let {
             Text(
                 text = stringResource(it),
-                color = CommonTheme.primary
+                color = LocalColorProvider.current.primary
             ) }
         },
-        backgroundColor = CommonTheme.primaryContainer,
+        backgroundColor = LocalColorProvider.current.primaryContainer,
         modifier = modifier,
         navigationIcon = {
             if (canNavigateBack) {
@@ -128,7 +127,7 @@ fun AppBar(
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Назад",
-                        tint = CommonTheme.primary
+                        tint = LocalColorProvider.current.primary
                     )
                 }
             }

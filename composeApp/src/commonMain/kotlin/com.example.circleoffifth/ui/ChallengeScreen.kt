@@ -18,32 +18,28 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
-
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-
-
 import androidx.compose.ui.text.style.TextAlign
-
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import circleoffifth.composeapp.generated.resources.Res
 import circleoffifth.composeapp.generated.resources.game_over
 import circleoffifth.composeapp.generated.resources.game_over_score
 import circleoffifth.composeapp.generated.resources.restart
-
 import com.example.circleoffifth.data.Chord
 import com.example.circleoffifth.ui.components.ChordButton
 import com.example.circleoffifth.ui.components.CircleOfFifth
 import com.example.circleoffifth.ui.components.Moves
 import com.example.circleoffifth.ui.components.Record
 import com.example.circleoffifth.ui.components.Score
-import com.example.circleoffifth.ui.theme.CommonTheme
+import com.example.circleoffifth.ui.theme.LocalColorProvider
 import com.example.circleoffifth.ui.theme.paddingMedium
 import com.example.circleoffifth.ui.theme.paddingSmall
+import com.example.circleoffifth.ui.util.isPortraitOrientation
 import com.example.circleoffifth.ui.viewModel.ChallengeViewModel
 import com.example.circleoffifth.utils.getChordSoundPlayer
 import org.jetbrains.compose.resources.stringResource
@@ -61,9 +57,7 @@ fun ChallengeScreen(
     val score by remember { viewModel.score }
     val record by remember { viewModel.record }
 
-    //TODO: LocalWindowInfo
-    // val configuration = LocalConfiguration.current
-//    if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+    if (isPortraitOrientation()) {
         VerticalChallengeScreen(
             viewModel = viewModel,
             currentChord = currentChord,
@@ -72,16 +66,16 @@ fun ChallengeScreen(
             record = record,
             endGame = endGame
         )
-//    } else {
-//        HorizontalChallengeScreen(
-//            viewModel = viewModel,
-//            currentChord = currentChord,
-//            currentMove = currentMove,
-//            score = score,
-//            record = record,
-//            endGame = endGame
-//        )
-//    }
+    } else {
+        HorizontalChallengeScreen(
+            viewModel = viewModel,
+            currentChord = currentChord,
+            currentMove = currentMove,
+            score = score,
+            record = record,
+            endGame = endGame
+        )
+    }
 }
 
 @Composable
@@ -240,8 +234,8 @@ fun RestartDialog(
                         .wrapContentSize(Alignment.Center),
                     onClick = onPosButtonClick,
                     colors = ButtonDefaults.buttonColors(
-                        contentColor = CommonTheme.primary,
-                        backgroundColor = CommonTheme.primaryContainer
+                        contentColor = LocalColorProvider.current.primary,
+                        backgroundColor = LocalColorProvider.current.primaryContainer
                     )
                 ) {
                     Text(text = stringResource(Res.string.restart))

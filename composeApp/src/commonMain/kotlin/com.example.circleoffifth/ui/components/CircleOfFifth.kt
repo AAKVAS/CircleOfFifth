@@ -25,7 +25,7 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.example.circleoffifth.data.Chord
-import com.example.circleoffifth.ui.theme.CommonTheme
+import com.example.circleoffifth.ui.theme.LocalColorProvider
 import com.example.circleoffifth.utils.toRadians
 import kotlin.math.PI
 import kotlin.math.atan2
@@ -75,9 +75,9 @@ fun CircleOfFifth(
     var innerRadius by remember { mutableFloatStateOf(0f) }
     var mediumRadius by remember { mutableFloatStateOf(0f) }
     var outerRadius by remember { mutableFloatStateOf(0f) }
-    val outerCircleColor = CommonTheme.primaryContainer
-    val innerCircleColor = CommonTheme.onPrimary
-    val textColor = CommonTheme.onSurface
+    val outerCircleColor = LocalColorProvider.current.primaryContainer
+    val innerCircleColor = LocalColorProvider.current.onPrimary
+    val textColor = LocalColorProvider.current.onSurface
 
     Column(
         modifier = modifier

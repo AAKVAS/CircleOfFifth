@@ -18,7 +18,7 @@ import androidx.compose.ui.layout.ContentScale
 import circleoffifth.composeapp.generated.resources.Res
 import circleoffifth.composeapp.generated.resources.baseline_music_note_24
 import circleoffifth.composeapp.generated.resources.play_chord
-import com.example.circleoffifth.ui.theme.CommonTheme
+import com.example.circleoffifth.ui.theme.LocalColorProvider
 import com.example.circleoffifth.ui.theme.btnHeight
 import com.example.circleoffifth.ui.theme.btnWidth
 import com.example.circleoffifth.ui.theme.cardCornerRadius
@@ -37,7 +37,7 @@ fun ChordButton(
             .width(btnWidth.margin)
             .clip(RoundedCornerShape(cardCornerRadius.margin))
             .clickable { onClick() }
-            .background(CommonTheme.primaryContainer),
+            .background(LocalColorProvider.current.primaryContainer),
         contentAlignment = Alignment.Center,
     ) {
         Image(
@@ -45,7 +45,7 @@ fun ChordButton(
             contentDescription = stringResource(Res.string.play_chord),
             alignment = Alignment.Center,
             contentScale =  ContentScale.Crop,
-            colorFilter = ColorFilter.tint(color = CommonTheme.primary),
+            colorFilter = ColorFilter.tint(color = LocalColorProvider.current.primary),
             modifier = modifier
                 .size(btnHeight.margin)
                 .padding(paddingSmall.margin)

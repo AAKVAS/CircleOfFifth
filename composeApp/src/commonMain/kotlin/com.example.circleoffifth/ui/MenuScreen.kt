@@ -19,8 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
-
-import com.example.circleoffifth.ui.theme.CommonTheme
+import com.example.circleoffifth.ui.theme.LocalColorProvider
 import com.example.circleoffifth.ui.theme.cardCornerRadius
 import com.example.circleoffifth.ui.theme.iconMedium
 import com.example.circleoffifth.ui.theme.paddingMedium
@@ -74,7 +73,7 @@ fun MenuItem(
                     contentDescription = stringResource(screen.title!!),
                     alignment = Alignment.Center,
                     contentScale =  ContentScale.Crop,
-                    colorFilter = ColorFilter.tint(color = CommonTheme.primary),
+                    colorFilter = ColorFilter.tint(color = LocalColorProvider.current.primary),
                     modifier = Modifier
                         .padding(end = paddingSmall.margin)
                         .size(iconMedium.margin)
@@ -82,13 +81,13 @@ fun MenuItem(
                 Text(
                     text = stringResource(screen.title),
                     style = MaterialTheme.typography.subtitle1,
-                    color = CommonTheme.primary,
+                    color = LocalColorProvider.current.primary,
                 )
             }
             Text(
                 text = stringResource(screen.description!!),
                 style = MaterialTheme.typography.body2,
-                color = CommonTheme.primary,
+                color = LocalColorProvider.current.primary,
                 modifier = Modifier.padding(
                     top = paddingSmall.margin,
                     bottom = paddingMedium.margin
