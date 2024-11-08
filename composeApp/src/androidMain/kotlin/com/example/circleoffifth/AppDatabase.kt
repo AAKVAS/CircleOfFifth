@@ -4,17 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
+
+import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import com.example.circleoffifth.AppDatabase.Companion.VERSION
 import com.example.circleoffifth.data.dao.GameDao
 import com.example.circleoffifth.data.entities.Mode
-import com.example.circleoffifth.data.entities.Mode.Companion.CHALLENGE
-import com.example.circleoffifth.data.entities.Mode.Companion.SURVIVE
 import com.example.circleoffifth.data.entities.Records
 import com.example.circleoffifth.data.entities.ScoreState
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-import java.util.UUID
+import kotlinx.coroutines.Dispatchers
 
 @Database(
     entities = [
@@ -33,31 +31,22 @@ abstract class AppDatabase: RoomDatabase() {
         @Volatile
         private var instance: AppDatabase? = null
 
-        fun getDatabase(context: Context, scope: CoroutineScope): AppDatabase {
-            return instance ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context,
-                    AppDatabase::class.java, "circleOfFifth")
-                    .addCallback(object : Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            onCreate(scope)
-                        }
-                    })
-                    .build()
-                this.instance = instance
-                instance
-            }
+        fun getDatabaseBuilder(context: Context): Builder<AppDatabase> {
+            val appContext = context.applicationContext
+            val dbFile = appContext.getDatabasePath("circleOfFifth.db")
+            return Room.databaseBuilder<AppDatabase>(
+                context = appContext,
+                name = dbFile.absolutePath
+            ).setDriver(BundledSQLiteDriver())
         }
 
-        fun onCreate(scope: CoroutineScope) {
-            instance?.let {
-                scope.launch {
-                    val trialMode = Mode(UUID.randomUUID().toString(), CHALLENGE)
-                    val surviveMode = Mode(UUID.randomUUID().toString(), SURVIVE)
-                    it.getGameDao().saveMode(trialMode)
-                    it.getGameDao().saveMode(surviveMode)
-                }
+        fun getDatabase(context: Context, scope: CoroutineScope): AppDatabase {
+            return instance ?: synchronized(this) {
+                val instance = getDatabaseBuilder(context)
+                    .setQueryCoroutineContext(Dispatchers.IO)
+                    .build()
+                    this.instance = instance
+                    instance
             }
         }
     }

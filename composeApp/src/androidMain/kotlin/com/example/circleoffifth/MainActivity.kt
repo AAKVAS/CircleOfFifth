@@ -7,30 +7,34 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.circleoffifth.di.appModule
 import com.example.circleoffifth.ui.CircleOfFifthApp
-import com.example.circleoffifth.ui.theme.CircleOfFifthTheme
-import com.example.circleoffifth.ui.viewModel.MainViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.example.circleoffifth.ui.theme.CommonTheme
+import org.koin.compose.KoinApplication
 
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: MainViewModel by viewModel()
+    // TODO splash Screen while modes creating
+    //private val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen().apply {
-            setKeepOnScreenCondition {
-                viewModel.modesCreated.value
-            }
-        }
+        installSplashScreen()
         super.onCreate(savedInstanceState)
 
         setContent {
-            CircleOfFifthTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    CircleOfFifthApp()
+            KoinApplication(
+                application = {
+                    modules(appModule())
+                }
+            ) {
+                CircleOfFifthTheme {
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = CommonTheme.background
+                    ) {
+                        CircleOfFifthApp()
+                    }
                 }
             }
         }

@@ -1,9 +1,7 @@
 
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -20,28 +18,8 @@ kotlin {
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+            jvmTarget.set(JvmTarget.JVM_17)
         }
-    }
-
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        moduleName = "composeApp"
-        browser {
-            val rootDirPath = project.rootDir.path
-            val projectDirPath = project.projectDir.path
-            commonWebpackConfig {
-                outputFileName = "composeApp.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(rootDirPath)
-                        add(projectDirPath)
-                    }
-                }
-            }
-        }
-        binaries.executable()
     }
 
     jvm("desktop")
@@ -50,42 +28,58 @@ kotlin {
         val desktopMain by getting
 
         commonMain.dependencies {
+            implementation(compose.preview)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+
+            //implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+//            implementation(libs.koin.compose.viewmodel.navigation)
+
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.androidx.room.ktx)
+            implementation(libs.sqlite.bundled)
+            implementation(libs.sqlite)
+            implementation(libs.androidx.room.compiler)
+
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation(libs.navigation.compose)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.androidx.material3.desktop)
+
+
         }
         androidMain {
             dependencies {
-                implementation(compose.preview)
-                implementation(libs.androidx.activity.compose)
 
-                implementation(libs.androidx.room.runtime)
-                implementation(libs.sqlite.bundled)
-                implementation(libs.sqlite)
+                implementation(libs.androidx.activity.compose)
 
                 implementation(libs.splashscreen)
                 implementation(libs.work.runtime.ktx)
 
-                implementation(libs.koin)
                 implementation(libs.androidx.material3.android)
+                //implementation(libs.koin)
+                //implementation(libs.androidx.lifecycle)
 
-                dependencies.add("kspAndroid", libs.androidx.room.compiler)
+
             }
-
         }
     }
 }
 
-
+dependencies {
+    add("kspAndroid", libs.androidx.room.compiler)
+    add("kspDesktop", libs.androidx.room.compiler)
+}
 
 android {
     namespace = "com.example.circleoffifth"
@@ -115,8 +109,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildTypes {
         getByName("release") {
@@ -137,14 +131,14 @@ android {
         }
     }
 }
-dependencies {
-    implementation(libs.androidx.navigation.runtime.ktx)
-    implementation(libs.androidx.navigation.compose)
-}
 
 
 room {
     schemaDirectory("$projectDir/schemas")
+}
+
+configurations.all {
+    exclude(group = "com.intellij", module = "annotations")
 }
 
 compose.desktop {
