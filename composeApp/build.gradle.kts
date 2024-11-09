@@ -43,10 +43,8 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
-            //implementation(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
-//            implementation(libs.koin.compose.viewmodel.navigation)
 
             implementation(libs.androidx.room.runtime)
             implementation(libs.androidx.room.ktx)
@@ -63,7 +61,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.androidx.material3.desktop)
 
-
+            implementation(libs.jlayer)
         }
         androidMain {
             dependencies {
@@ -75,7 +73,6 @@ kotlin {
 
                 implementation(libs.androidx.material3.android)
                 implementation(libs.koin)
-                //implementation(libs.androidx.lifecycle)
             }
         }
     }

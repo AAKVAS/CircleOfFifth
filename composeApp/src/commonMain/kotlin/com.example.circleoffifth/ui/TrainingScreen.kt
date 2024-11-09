@@ -12,11 +12,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.circleoffifth.ui.components.CircleOfFifth
 import com.example.circleoffifth.ui.theme.paddingSmall
-import com.example.circleoffifth.ui.util.isPortraitOrientation
 import com.example.circleoffifth.utils.getChordSoundPlayer
 
 @Composable
-fun TrainingScreen() {
+fun TrainingScreen(
+    isPortraitOrientation: Boolean
+) {
     Surface{
         Column(
             verticalArrangement = Arrangement.Top,
@@ -27,7 +28,7 @@ fun TrainingScreen() {
         ) {
             CircleOfFifth(
                 modifier =
-                    if (isPortraitOrientation().not()) {
+                    if (isPortraitOrientation.not()) {
                         Modifier.fillMaxHeight()
                     } else  {
                         Modifier.fillMaxWidth()

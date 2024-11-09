@@ -28,7 +28,6 @@ import circleoffifth.composeapp.generated.resources.survive_description
 import circleoffifth.composeapp.generated.resources.training
 import circleoffifth.composeapp.generated.resources.training_description
 import com.example.circleoffifth.ui.theme.LocalColorProvider
-import com.example.circleoffifth.ui.util.isPortraitOrientation
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -58,6 +57,7 @@ enum class Destinations(
 
 @Composable
 fun CircleOfFifthApp(
+    isPortraitOrientation: Boolean,
     navController: NavHostController = rememberNavController()
 ) {
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -89,13 +89,13 @@ fun CircleOfFifthApp(
                 MenuScreen(screens = screens, onItemClick = { navController.navigate(it.name) })
             }
             composable(route = Destinations.TRAINING.name) {
-                TrainingScreen()
+                TrainingScreen(isPortraitOrientation = isPortraitOrientation)
             }
             composable(route = Destinations.CHALLENGE.name) {
-                ChallengeScreen()
+                ChallengeScreen(isPortraitOrientation = isPortraitOrientation)
             }
             composable(route = Destinations.SURVIVE.name) {
-                SurviveScreen()
+                SurviveScreen(isPortraitOrientation = isPortraitOrientation)
             }
         }
     }
@@ -109,9 +109,6 @@ fun AppBar(
     navigateUp: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    if (isPortraitOrientation().not()) {
-        return
-    }
     TopAppBar(
         title = { currentScreen.title?.let {
             Text(

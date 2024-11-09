@@ -19,8 +19,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -39,7 +39,6 @@ import com.example.circleoffifth.ui.components.Score
 import com.example.circleoffifth.ui.theme.LocalColorProvider
 import com.example.circleoffifth.ui.theme.paddingMedium
 import com.example.circleoffifth.ui.theme.paddingSmall
-import com.example.circleoffifth.ui.util.isPortraitOrientation
 import com.example.circleoffifth.ui.viewModel.ChallengeViewModel
 import com.example.circleoffifth.utils.getChordSoundPlayer
 import org.jetbrains.compose.resources.stringResource
@@ -48,16 +47,17 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun ChallengeScreen(
-    viewModel: ChallengeViewModel = koinViewModel()
+    isPortraitOrientation: Boolean,
+    viewModel: ChallengeViewModel = koinViewModel(),
 ) {
-    val currentChord by remember { viewModel.currentChord }
-    val currentMove by remember { viewModel.currentMove }
-    val endGame by remember { viewModel.isEndGame }
+    val currentChord by viewModel.currentChord.collectAsState()
+    val currentMove by viewModel.currentMove.collectAsState()
+    val endGame by viewModel.isEndGame.collectAsState()
 
-    val score by remember { viewModel.score }
-    val record by remember { viewModel.record }
+    val score by viewModel.score.collectAsState()
+    val record by viewModel.record.collectAsState()
 
-    if (isPortraitOrientation()) {
+    if (isPortraitOrientation) {
         VerticalChallengeScreen(
             viewModel = viewModel,
             currentChord = currentChord,
