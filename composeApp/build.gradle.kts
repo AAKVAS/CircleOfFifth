@@ -2,6 +2,7 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -23,6 +24,12 @@ kotlin {
     }
 
     jvm("desktop")
+    jvmToolchain(17)
+
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    compilerOptions {
+        languageVersion.set(KotlinVersion.KOTLIN_1_9)
+    }
 
     sourceSets {
         val desktopMain by getting
@@ -67,10 +74,8 @@ kotlin {
                 implementation(libs.work.runtime.ktx)
 
                 implementation(libs.androidx.material3.android)
-                //implementation(libs.koin)
+                implementation(libs.koin)
                 //implementation(libs.androidx.lifecycle)
-
-
             }
         }
     }

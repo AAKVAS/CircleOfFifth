@@ -10,9 +10,8 @@ import com.example.circleoffifth.data.ChordRepository
 import com.example.circleoffifth.data.entities.Mode
 import com.example.circleoffifth.data.entities.ScoreState
 import kotlinx.coroutines.launch
+import java.util.UUID
 import kotlin.math.max
-import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
 class ChallengeViewModel(
     private val chordRepository: ChordRepository
@@ -59,7 +58,6 @@ class ChallengeViewModel(
         playChordBtnClicked = false
     }
 
-    @OptIn(ExperimentalUuidApi::class)
     fun checkChord(chord: Chord) {
         if (playChordBtnClicked) {
             if (chord == currentChord.value) {
@@ -73,7 +71,7 @@ class ChallengeViewModel(
             _currentMove.value += 1
             viewModelScope.launch {
                 val scoreState = ScoreState(
-                    Uuid.random().toString(),
+                    UUID.randomUUID().toString(),
                     chordRepository.getGameModeByName(Mode.CHALLENGE).uid,
                     _score.value,
                     _currentMove.value
