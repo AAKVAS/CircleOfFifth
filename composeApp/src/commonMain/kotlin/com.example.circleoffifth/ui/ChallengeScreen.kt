@@ -87,7 +87,7 @@ fun VerticalChallengeScreen(
     record: Int,
     endGame: Boolean
 ) {
-    Surface {
+    Surface(color = LocalColorProvider.current.background) {
         Column(
             verticalArrangement = Arrangement.SpaceBetween,
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -134,7 +134,7 @@ fun HorizontalChallengeScreen(
     record: Int,
     endGame: Boolean
 ) {
-    Surface {
+    Surface(color = LocalColorProvider.current.background) {
         Row(
             modifier = Modifier
                 .fillMaxSize()
@@ -204,6 +204,7 @@ fun RestartDialog(
                 .wrapContentSize()
                 .padding(paddingMedium.margin),
             shape = RoundedCornerShape(16.dp),
+            backgroundColor = LocalColorProvider.current.background
         ) {
             Column(
                 modifier = Modifier.padding(paddingMedium.margin)
@@ -214,6 +215,7 @@ fun RestartDialog(
                         .fillMaxWidth()
                         .wrapContentSize(Alignment.Center),
                     textAlign = TextAlign.Center,
+                    color = LocalColorProvider.current.onBackground,
                     style = MaterialTheme.typography.subtitle1
                 )
                 Text(
@@ -221,6 +223,7 @@ fun RestartDialog(
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentSize(Alignment.Center),
+                    color = LocalColorProvider.current.onBackground,
                     textAlign = TextAlign.Center,
                 )
                 Spacer(

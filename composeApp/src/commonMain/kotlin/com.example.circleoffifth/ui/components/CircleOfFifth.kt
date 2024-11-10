@@ -205,17 +205,14 @@ fun findChord(
     val dx = (center.x - offset.x).toDouble()
     val dy = (center.y - offset.y).toDouble()
 
-    // Внутри пустого внутреннего круга
     if (insideCircle(dx, dy, innerRadius.toDouble())) {
         return null
     }
 
-    // Клик внутри минорного круга
     if (insideCircle(dx, dy, mediumRadius.toDouble() + halfCircleWidth)) {
         return innerChordList[calculateChordIndex(dx, dy)]
     }
 
-    // Клик внутри мажорного круга
     if (insideCircle(dx, dy, outerRadius.toDouble() + halfCircleWidth)) {
         return outerChordList[calculateChordIndex(dx, dy)]
     }

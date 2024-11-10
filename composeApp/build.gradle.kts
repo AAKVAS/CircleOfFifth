@@ -58,6 +58,7 @@ kotlin {
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+            implementation(compose.desktop.windows_x64)
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.androidx.material3.desktop)
 
@@ -108,6 +109,10 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -148,9 +153,15 @@ compose.desktop {
         mainClass = "com.example.circleoffifth.MainKt"
 
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.example.circleoffifth"
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe)
+            packageName = "circleoffifth"
             packageVersion = "1.0.0"
+        }
+
+        buildTypes.release.proguard {
+            obfuscate.set(true)
+            configurationFiles.from(project.file("proguard-rules.pro"))
+            joinOutputJars.set(true)
         }
     }
 }

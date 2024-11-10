@@ -1,43 +1,48 @@
-[English](README_en.md)
+[Russian](README_ru.md)
 
 <div align="center">
 
-# Кварто-квинтовый круг
-Android приложение для тренировки музыкального слуха.
-
-<a href="https://apps.rustore.ru/app/com.example.circleoffifth">
-      <img alt="Get it on RuStore" src="https://github.com/AAKVAS/CircleOfFifth/assets/76523640/7ee0bc43-e132-451c-a795-ef5999fae0c8" height="100">
-</a>
-<a href="https://github.com/AAKVAS/CircleOfFifth/releases/latest">
-      <img alt="Get it on GitHub" src="https://raw.githubusercontent.com/deckerst/common/main/assets/get-it-on-github.png" height="100">
-</a>
+# Circle Of Fifth
 
 </div>
 
-## 📖 Описание
-Основным элементом приложения является кварто-квинтовый круг, при нажатии аккордов в котором проигрываются звуки пианино.
+An interactive Kotlin Multiplatform application designed to enhance ear training through musical exercises. Available for Android and Desktop.
 
-В приложении есть несколько способов взаимодействия с кварто-квинтовым кругом:
-*	__Тренировка__ – экран с кварто-квинтовым кругом, где можно нажимать на аккорды и пытаться составить мелодию или запомнить звуки.
-*	__Испытание__ – экран с кварто-квинтовым кругом и кнопкой, которая издаёт случайный аккорд. Задача пользователя - найти этот аккорд. Всего 10 раундов. Каждый правильный ответ повышает счёт на 10 очков.
-*	__Выживание__ – экран с кварто-квинтовым кругом и кнопкой, которая издаёт случайный аккорд. Суть режима заключается в том, чтобы набрать как можно больший счёт, пока не будет совершена первая ошибка. Каждый правильный ответ повышает счёт на 10 очков.
 
-## 📷 Скриншоты
+## 📖 Description
+The primary feature of the application is the Circle of Fifths, where clicking on chords produces the corresponding piano chord sounds.
 
-<img src="https://github.com/AAKVAS/CircleOfFifth/assets/76523640/06f90b66-8a07-4399-86f5-a465e390b8c4" alt="drawing" width="220"/>
-<img src="https://github.com/AAKVAS/CircleOfFifth/assets/76523640/81a4a68d-0656-46a6-98d7-e3ebcfef9d43" alt="drawing" width="220"/>
-<img src="https://github.com/AAKVAS/CircleOfFifth/assets/76523640/939981a2-6190-4cc3-9ef2-dee41433c70f" alt="drawing" width="220"/>
-<img src="https://github.com/AAKVAS/CircleOfFifth/assets/76523640/fce37896-3766-4023-8e96-007a232deae4" alt="drawing" width="220"/>
+Upon entering the application, users encounter a menu with the following sections:
+* __Training__: A screen featuring the Circle of Fifths, allowing users to click on chords to compose melodies or practice recognizing chord sounds.
+* __Challenge__: This screen presents the Circle of Fifths alongside a button that generates a random sound. The user's task is to find this chord. Total 10 rounds. Each correct answer increases the score by 10 points.
+* __Survive__: Similar to the Challenge mode, this screen includes the Circle of Fifths and a button that produces a random chord sound. Each correct answer increases the score until an error is made, resetting the score.
 
-## 🌎 Локализация
-В данный момент существует поддержка русского и английского языка.
+## 📷 Screenshots
 
-## Используемые библиотеки
-* Kotlin
-* Jetpack Compose
-* Hilt
+#### Android
+
+<img src="https://github.com/AAKVAS/CircleOfFifth/assets/76523640/1770cd46-1a89-4eb3-8d7d-9957e98f5fd0" alt="drawing" width="220"/>
+<img src="https://github.com/AAKVAS/CircleOfFifth/assets/76523640/8099ec02-65e9-4ee6-99e1-8f24648a37d5" alt="drawing" width="220"/>
+<img src="https://github.com/AAKVAS/CircleOfFifth/assets/76523640/a836ebfc-43c3-46fc-9733-371ac05af6d8" alt="drawing" width="220"/>
+<img src="https://github.com/AAKVAS/CircleOfFifth/assets/76523640/bf8f0496-0ccb-45c5-a020-d39776af9c2d" alt="drawing" width="220"/>
+
+#### Desktop
+
+<img src="https://github.com/user-attachments/assets/c03e18dd-35be-486a-af16-d9524ec7c006" alt="drawing" width="440"/>
+<img src="https://github.com/user-attachments/assets/0470a8ea-a73e-4d05-9b39-b74a6a4f44e8" alt="drawing" width="440"/>
+
+
+## Technologies Used
+
+* Kotlin multiplatform
+* Compose Multiplatform
+* Kotlin Coroutines
+* Koin
 * Room
-* ViewModel
+* MVVM
 
-## Требования
-* Минимальный SDK - 27 (Android 8.1 Oreo)
+
+## 🌎 Translations
+
+Currently supports English and Russian.
+

@@ -59,7 +59,8 @@ fun MenuItem(
     Card(
         shape = RoundedCornerShape(cardCornerRadius.margin),
         onClick = { onItemClick(screen) },
-        modifier = modifier
+        modifier = modifier,
+        backgroundColor = LocalColorProvider.current.surfaceVariant
     ) {
         Column(
             modifier = Modifier.padding(horizontal = paddingMedium.margin)

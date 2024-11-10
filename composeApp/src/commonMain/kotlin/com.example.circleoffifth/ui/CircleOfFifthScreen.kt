@@ -72,7 +72,8 @@ fun CircleOfFifthApp(
                 canNavigateBack = navController.previousBackStackEntry != null,
                 navigateUp = { navController.navigateUp() }
             )
-        }
+        },
+        backgroundColor = LocalColorProvider.current.background
     ) { innerPadding ->
         NavHost(
             navController = navController,
@@ -123,7 +124,7 @@ fun AppBar(
                 IconButton(onClick = navigateUp) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Назад",
+                        contentDescription = "Back",
                         tint = LocalColorProvider.current.primary
                     )
                 }

@@ -26,8 +26,10 @@ class MainActivity : ComponentActivity() {
                     LocalConfiguration.current.orientation == Configuration.ORIENTATION_PORTRAIT
 
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = LocalColorProvider.current.background
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    color = LocalColorProvider.current.surfaceVariant,
+
                 ) {
                     CircleOfFifthApp(isPortraitOrientation = isPortraitOrientation)
                 }

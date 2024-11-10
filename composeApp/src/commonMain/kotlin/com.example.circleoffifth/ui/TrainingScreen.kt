@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.circleoffifth.ui.components.CircleOfFifth
+import com.example.circleoffifth.ui.theme.LocalColorProvider
 import com.example.circleoffifth.ui.theme.paddingSmall
 import com.example.circleoffifth.utils.getChordSoundPlayer
 
@@ -18,7 +19,7 @@ import com.example.circleoffifth.utils.getChordSoundPlayer
 fun TrainingScreen(
     isPortraitOrientation: Boolean
 ) {
-    Surface{
+    Surface(color = LocalColorProvider.current.background) {
         Column(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,

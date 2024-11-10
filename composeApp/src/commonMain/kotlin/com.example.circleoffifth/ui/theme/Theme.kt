@@ -11,6 +11,8 @@ data class ColorTheme(
     val onPrimary: Color,
     val primaryContainer: Color,
     val onSurface: Color,
+    val surfaceVariant: Color,
+    val onBackground: Color,
 )
 
 val lightColorTheme = ColorTheme(
@@ -19,6 +21,8 @@ val lightColorTheme = ColorTheme(
     primaryContainer = md_theme_light_primaryContainer,
     background = md_theme_light_background,
     onSurface = md_theme_light_onSurface,
+    surfaceVariant = md_theme_light_surfaceVariant,
+    onBackground = md_theme_light_onBackground
 )
 
 val darkColorTheme = ColorTheme(
@@ -27,6 +31,8 @@ val darkColorTheme = ColorTheme(
     primaryContainer = md_theme_dark_primaryContainer,
     background = md_theme_dark_background,
     onSurface = md_theme_dark_onSurface,
+    surfaceVariant = md_theme_dark_surfaceVariant,
+    onBackground = md_theme_dark_onBackground
 )
 
 expect fun getColorTheme(
